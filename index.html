@@ -29,7 +29,28 @@
         <tbody></tbody>
       </table>
     </div>
+    <div class="container">
+      <h2>Dynamic Table with Form</h2>
+      <form id="dataForm">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="number" id="age" placeholder="Age" required />
+        <input type="text" id="address" placeholder="Address" required />
+        <button type="submit">Add to Table</button>
+      </form>
 
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <script src="js/script.js"></script>
   </body>
 </html>
