@@ -1,110 +1,1165 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Table Manager | Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #818cf8;
+        --secondary: #10b981;
+        --secondary-dark: #059669;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --info: #3b82f6;
+        --dark: #1e293b;
+        --dark-light: #334155;
+        --light: #f8fafc;
+        --gray: #94a3b8;
+        --gray-light: #e2e8f0;
+        --border-radius: 16px;
+        --border-radius-sm: 10px;
+        --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Responsive Dynamic Table</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-<body>
-  <div class="main-container">
-    <header>
-      <h1><i class="fas fa-table"></i> Dynamic Table Manager</h1>
-      <p class="subtitle">Add, view, and manage user data with this fully responsive dynamic table. Works perfectly on
-        all devices from mobile to desktop.</p>
-    </header>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
+        min-height: 100vh;
+        color: var(--dark);
+        line-height: 1.6;
+      }
 
-    <div class="card">
-      <h2><i class="fas fa-user-plus"></i> Add New User</h2>
-      <form id="dataForm">
-        <div class="form-group">
-          <label for="name"><i class="fas fa-user"></i> Full Name</label>
-          <input type="text" id="name" placeholder="Enter full name" required />
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-top: 20px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+      }
+
+      .logo-text h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .tagline {
+        color: var(--dark-light);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        opacity: 0.8;
+      }
+
+      /* Main Layout */
+      .main-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      @media (min-width: 992px) {
+        .main-layout {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      /* Card Styles */
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: var(--transition);
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--gray-light);
+      }
+
+      .card-header i {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--dark);
+      }
+
+      .card-subtitle {
+        color: var(--gray);
+        font-size: 0.95rem;
+        margin-top: 5px;
+      }
+
+      /* Form Styles */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--dark);
+        font-size: 0.95rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 14px 45px 14px 15px;
+        border: 2px solid var(--gray-light);
+        border-radius: var(--border-radius-sm);
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        transition: var(--transition);
+        background: white;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      }
+
+      .form-icon {
+        position: absolute;
+        right: 15px;
+        top: 40px;
+        color: var(--gray);
+        font-size: 1.1rem;
+      }
+
+      .btn {
+        padding: 16px 30px;
+        border: none;
+        border-radius: var(--border-radius-sm);
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: var(--transition);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        grid-column: 1 / -1;
+        margin-top: 10px;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4);
+      }
+
+      .btn-sm {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, var(--danger), #dc2626);
+        color: white;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      }
+
+      .btn-danger:hover {
+        background: linear-gradient(135deg, #dc2626, var(--danger));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+      }
+
+      .btn-edit {
+        background: linear-gradient(135deg, var(--warning), #d97706);
+        color: white;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      }
+
+      .btn-edit:hover {
+        background: linear-gradient(135deg, #d97706, var(--warning));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(245, 158, 11, 0.4);
+      }
+
+      /* Table Styles */
+      .table-container {
+        overflow-x: auto;
+        border-radius: var(--border-radius-sm);
+        margin-top: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 800px;
+      }
+
+      .table thead {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      }
+
+      .table th {
+        color: white;
+        font-weight: 600;
+        padding: 20px 15px;
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .table th:first-child {
+        border-radius: var(--border-radius-sm) 0 0 0;
+      }
+
+      .table th:last-child {
+        border-radius: 0 var(--border-radius-sm) 0 0;
+      }
+
+      .table tbody tr {
+        transition: var(--transition);
+        border-bottom: 1px solid var(--gray-light);
+      }
+
+      .table tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      .table tbody tr:hover {
+        background-color: rgba(99, 102, 241, 0.05);
+      }
+
+      .table td {
+        padding: 18px 15px;
+        color: var(--dark);
+        font-size: 0.95rem;
+      }
+
+      /* User Avatar in Table */
+      .user-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .user-name {
+        font-weight: 600;
+        color: var(--dark);
+      }
+
+      .user-email {
+        font-size: 0.85rem;
+        color: var(--gray);
+        margin-top: 2px;
+      }
+
+      /* Status Badge */
+      .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .status-active {
+        background-color: rgba(16, 185, 129, 0.15);
+        color: var(--secondary);
+      }
+
+      .status-inactive {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: var(--danger);
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* Stats Section */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, var(--light), white);
+        border-radius: var(--border-radius-sm);
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin: 0 auto 15px;
+      }
+
+      .stat-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        line-height: 1;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: var(--gray);
+        font-weight: 500;
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--gray);
+      }
+
+      .empty-state-icon {
+        font-size: 4rem;
+        color: var(--gray-light);
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+
+      .empty-state-text {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: var(--dark-light);
+      }
+
+      .empty-state-subtext {
+        font-size: 0.95rem;
+        opacity: 0.7;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 25px 0;
+        color: var(--dark-light);
+        border-top: 1px solid var(--gray-light);
+        font-size: 0.95rem;
+      }
+
+      .device-icons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+        font-size: 1.5rem;
+        color: var(--primary);
+      }
+
+      /* Toast Notification */
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 18px 25px;
+        border-radius: var(--border-radius-sm);
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        max-width: 350px;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .toast-success {
+        background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+        border-left: 4px solid var(--secondary-dark);
+      }
+
+      .toast-error {
+        background: linear-gradient(135deg, var(--danger), #dc2626);
+        border-left: 4px solid #dc2626;
+      }
+
+      .toast-warning {
+        background: linear-gradient(135deg, var(--warning), #d97706);
+        border-left: 4px solid #d97706;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        .logo-text h1 {
+          font-size: 2rem;
+        }
+
+        .tagline {
+          font-size: 1rem;
+        }
+
+        .card {
+          padding: 25px 20px;
+        }
+
+        .card-title {
+          font-size: 1.5rem;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .btn {
+          padding: 14px 20px;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .table th,
+        .table td {
+          padding: 15px 10px;
+        }
+
+        /* Stack table for mobile */
+        @media (max-width: 640px) {
+          .table-container {
+            margin-left: -5px;
+            margin-right: -5px;
+            width: calc(100% + 10px);
+          }
+          
+          .table, .table thead, .table tbody, .table th, .table td, .table tr {
+            display: block;
+          }
+          
+          .table thead {
+            display: none;
+          }
+          
+          .table tr {
+            margin-bottom: 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius-sm);
+            padding: 15px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+          }
+          
+          .table td {
+            padding: 12px 10px;
+            border: none;
+            border-bottom: 1px solid var(--gray-light);
+            position: relative;
+            padding-left: 45%;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          
+          .table td:last-child {
+            border-bottom: none;
+          }
+          
+          .table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: left;
+            font-size: 0.9rem;
+          }
+          
+          .user-cell {
+            justify-content: space-between;
+            padding-left: 0;
+          }
+          
+          .action-buttons {
+            justify-content: flex-end;
+          }
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .btn-sm {
+          width: 100%;
+          justify-content: center;
+        }
+        
+        .action-buttons {
+          flex-direction: column;
+        }
+        
+        .toast {
+          left: 15px;
+          right: 15px;
+          bottom: 15px;
+          max-width: none;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+
+      /* Dark Mode Toggle */
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 100;
+        box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        transition: var(--transition);
+      }
+
+      .theme-toggle:hover {
+        transform: rotate(30deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Theme Toggle -->
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </div>
+
+      <!-- Header -->
+      <header class="header animate">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-table"></i>
+          </div>
+          <div class="logo-text">
+            <h1>TableMaster Pro</h1>
+            <p class="tagline">Manage your data with style. A premium table management experience for all devices.</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Layout -->
+      <div class="main-layout">
+        <!-- Left Column: Form & Stats -->
+        <div class="left-column">
+          <!-- Form Card -->
+          <div class="card animate delay-1">
+            <div class="card-header">
+              <i class="fas fa-user-plus"></i>
+              <div>
+                <div class="card-title">Add New Record</div>
+                <div class="card-subtitle">Fill in the details below to add a new user</div>
+              </div>
+            </div>
+            
+            <form id="dataForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name" class="form-label">Full Name</label>
+                  <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                  <div class="form-icon">
+                    <i class="fas fa-user"></i>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                  <div class="form-icon">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="age" class="form-label">Age</label>
+                  <input type="number" id="age" class="form-input" placeholder="25" min="1" max="120" required>
+                  <div class="form-icon">
+                    <i class="fas fa-birthday-cake"></i>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="address" class="form-label">Address</label>
+                  <input type="text" id="address" class="form-input" placeholder="City, Country" required>
+                  <div class="form-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-plus-circle"></i> Add to Table
+                </button>
+              </div>
+            </form>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-value" id="totalUsers">2</div>
+                <div class="stat-label">Total Users</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-value" id="averageAge">30.0</div>
+                <div class="stat-label">Avg. Age</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-value" id="activeUsers">2</div>
+                <div class="stat-label">Active</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-value" id="inactiveUsers">0</div>
+                <div class="stat-label">Inactive</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
-          <input type="email" id="email" placeholder="Enter email address" required />
+        <!-- Right Column: Table -->
+        <div class="right-column">
+          <div class="card animate delay-2">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              <div>
+                <div class="card-title">User Records</div>
+                <div class="card-subtitle">Manage all your user data in one place</div>
+              </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <!-- Initial sample data -->
+                  <tr>
+                    <td data-label="User">
+                      <div class="user-cell">
+                        <div class="user-avatar">JD</div>
+                        <div class="user-info">
+                          <div class="user-name">John Doe</div>
+                          <div class="user-email">john.doe@example.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td data-label="Email">john.doe@example.com</td>
+                    <td data-label="Age">28</td>
+                    <td data-label="Status">
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td data-label="Actions">
+                      <div class="action-buttons">
+                        <button class="btn btn-edit btn-sm" onclick="editRow(this)">
+                          <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                          <i class="fas fa-trash"></i> Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td data-label="User">
+                      <div class="user-cell">
+                        <div class="user-avatar">SJ</div>
+                        <div class="user-info">
+                          <div class="user-name">Sarah Johnson</div>
+                          <div class="user-email">sarah.j@example.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td data-label="Email">sarah.j@example.com</td>
+                    <td data-label="Age">32</td>
+                    <td data-label="Status">
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td data-label="Actions">
+                      <div class="action-buttons">
+                        <button class="btn btn-edit btn-sm" onclick="editRow(this)">
+                          <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                          <i class="fas fa-trash"></i> Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div id="emptyState" class="empty-state" style="display: none;">
+              <div class="empty-state-icon">
+                <i class="fas fa-users-slash"></i>
+              </div>
+              <div class="empty-state-text">No users found</div>
+              <div class="empty-state-subtext">Add your first user using the form on the left</div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="age"><i class="fas fa-birthday-cake"></i> Age</label>
-          <input type="number" id="age" placeholder="Enter age" min="1" max="120" required />
+      <!-- Footer -->
+      <footer class="footer animate delay-3">
+        <p>© 2023 TableMaster Pro | Premium Table Management System</p>
+        <p>Designed with ❤️ for all devices</p>
+        <div class="device-icons">
+          <i class="fas fa-mobile-alt"></i>
+          <i class="fas fa-tablet-alt"></i>
+          <i class="fas fa-laptop"></i>
+          <i class="fas fa-desktop"></i>
         </div>
-
-        <div class="form-group">
-          <label for="address"><i class="fas fa-home"></i> Address</label>
-          <input type="text" id="address" placeholder="Enter address" required />
-        </div>
-
-        <button type="submit" class="btn">
-          <i class="fas fa-plus-circle"></i> Add to Table
-        </button>
-      </form>
+      </footer>
     </div>
 
-    <div class="card">
-      <h2><i class="fas fa-users"></i> User Records</h2>
-      <div class="stats">
-        <span>Total Users: <span id="totalUsers">0</span></span>
-        <span>Average Age: <span id="averageAge">0</span></span>
-      </div>
-
-      <div class="table-container">
-        <table id="dataTable">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Age</th>
-              <th>Address</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Initial sample data -->
-            <tr class="fade-in">
-              <td data-label="Name">John Smith</td>
-              <td data-label="Email">john.smith@example.com</td>
-              <td data-label="Age">28</td>
-              <td data-label="Address">123 Main St, New York</td>
-              <td data-label="Actions" class="action-cell">
-                <button class="btn btn-delete" onclick="deleteRow(this)">
-                  <i class="fas fa-trash"></i> Delete
-                </button>
-              </td>
-            </tr>
-            <tr class="fade-in">
-              <td data-label="Name">Sarah Johnson</td>
-              <td data-label="Email">sarah.j@example.com</td>
-              <td data-label="Age">32</td>
-              <td data-label="Address">456 Oak Ave, Los Angeles</td>
-              <td data-label="Actions" class="action-cell">
-                <button class="btn btn-delete" onclick="deleteRow(this)">
-                  <i class="fas fa-trash"></i> Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="emptyState" class="empty-state" style="display: none;">
-        <i class="fas fa-users-slash"></i>
-        <p>No users found. Add your first user above!</p>
-      </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMessage">Record added successfully!</span>
     </div>
 
-    <footer>
-      <p>© 2023 Dynamic Table Manager | Designed to be fully responsive on all devices</p>
-      <p><i class="fas fa-mobile-alt"></i> <i class="fas fa-tablet-alt"></i> <i class="fas fa-laptop"></i></p>
-    </footer>
-  </div>
-
-  <script src="js/script.js"></script>
-</body>
-
+    <script>
+      // DOM Elements
+      const form = document.getElementById("dataForm");
+      const tableBody = document.getElementById("tableBody");
+      const emptyState = document.getElementById("emptyState");
+      const toast = document.getElementById("toast");
+      const toastMessage = document.getElementById("toastMessage");
+      
+      // Stats elements
+      const totalUsersEl = document.getElementById("totalUsers");
+      const averageAgeEl = document.getElementById("averageAge");
+      const activeUsersEl = document.getElementById("activeUsers");
+      const inactiveUsersEl = document.getElementById("inactiveUsers");
+      
+      // Theme toggle
+      const themeToggle = document.getElementById("themeToggle");
+      
+      // Initialize stats
+      updateStats();
+      
+      // Theme toggle functionality
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const icon = themeToggle.querySelector("i");
+        if (document.body.classList.contains("dark-mode")) {
+          icon.className = "fas fa-sun";
+          document.documentElement.style.setProperty("--light", "#1e293b");
+          document.documentElement.style.setProperty("--dark", "#f8fafc");
+          document.documentElement.style.setProperty("--dark-light", "#cbd5e1");
+          document.documentElement.style.setProperty("--gray-light", "#334155");
+        } else {
+          icon.className = "fas fa-moon";
+          document.documentElement.style.setProperty("--light", "#f8fafc");
+          document.documentElement.style.setProperty("--dark", "#1e293b");
+          document.documentElement.style.setProperty("--dark-light", "#334155");
+          document.documentElement.style.setProperty("--gray-light", "#e2e8f0");
+        }
+      });
+      
+      // Form submission
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const address = document.getElementById("address").value.trim();
+        
+        // Validation
+        if (!name || !email || !age || !address) {
+          showToast("Please fill in all fields", "error");
+          return;
+        }
+        
+        if (!validateEmail(email)) {
+          showToast("Please enter a valid email address", "error");
+          return;
+        }
+        
+        if (age < 1 || age > 120) {
+          showToast("Age must be between 1 and 120", "error");
+          return;
+        }
+        
+        // Create new row
+        const row = document.createElement("tr");
+        const avatarInitials = getInitials(name);
+        const isActive = Math.random() > 0.3; // 70% chance of active
+        
+        row.innerHTML = `
+          <td data-label="User">
+            <div class="user-cell">
+              <div class="user-avatar">${avatarInitials}</div>
+              <div class="user-info">
+                <div class="user-name">${name}</div>
+                <div class="user-email">${email}</div>
+              </div>
+            </div>
+          </td>
+          <td data-label="Email">${email}</td>
+          <td data-label="Age">${age}</td>
+          <td data-label="Status">
+            <span class="status-badge ${isActive ? 'status-active' : 'status-inactive'}">
+              ${isActive ? 'Active' : 'Inactive'}
+            </span>
+          </td>
+          <td data-label="Actions">
+            <div class="action-buttons">
+              <button class="btn btn-edit btn-sm" onclick="editRow(this)">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+          </td>
+        `;
+        
+        // Add animation
+        row.style.opacity = "0";
+        row.style.transform = "translateY(20px)";
+        
+        // Add to table
+        tableBody.appendChild(row);
+        
+        // Animate in
+        setTimeout(() => {
+          row.style.transition = "all 0.4s ease";
+          row.style.opacity = "1";
+          row.style.transform = "translateY(0)";
+        }, 10);
+        
+        // Update stats
+        updateStats();
+        
+        // Show success message
+        showToast(`"${name}" added successfully!`, "success");
+        
+        // Reset form
+        form.reset();
+        document.getElementById("name").focus();
+      });
+      
+      // Delete row
+      function deleteRow(button) {
+        const row = button.closest("tr");
+        const userName = row.querySelector(".user-name").textContent;
+        
+        // Animate out
+        row.style.opacity = "0";
+        row.style.transform = "translateX(100px)";
+        row.style.transition = "all 0.3s ease";
+        
+        setTimeout(() => {
+          row.remove();
+          updateStats();
+          showToast(`"${userName}" deleted successfully!`, "error");
+        }, 300);
+      }
+      
+      // Edit row
+      function editRow(button) {
+        const row = button.closest("tr");
+        const name = row.querySelector(".user-name").textContent;
+        const email = row.querySelector(".user-email").textContent;
+        const age = row.cells[2].textContent;
+        
+        // Populate form
+        document.getElementById("name").value = name;
+        document.getElementById("email").value = email;
+        document.getElementById("age").value = age;
+        document.getElementById("address").value = row.cells[1].textContent;
+        
+        // Change button text
+        const submitBtn = form.querySelector("button[type='submit']");
+        submitBtn.innerHTML = '<i class="fas fa-save"></i> Update Record';
+        
+        // Store reference to row for update
+        submitBtn.dataset.editRow = Array.from(tableBody.children).indexOf(row);
+        
+        // Show message
+        showToast(`Editing "${name}"`, "warning");
+      }
+      
+      // Update stats
+      function updateStats() {
+        const rows = tableBody.querySelectorAll("tr");
+        const totalUsers = rows.length;
+        
+        // Calculate stats
+        let totalAge = 0;
+        let activeCount = 0;
+        let inactiveCount = 0;
+        
+        rows.forEach(row => {
+          const age = parseInt(row.cells[2].textContent) || 0;
+          totalAge += age;
+          
+          const status = row.querySelector(".status-badge");
+          if (status && status.textContent.includes("Active")) {
+            activeCount++;
+          } else {
+            inactiveCount++;
+          }
+        });
+        
+        // Update UI
+        totalUsersEl.textContent = totalUsers;
+        averageAgeEl.textContent = totalUsers > 0 ? (totalAge / totalUsers).toFixed(1) : "0.0";
+        activeUsersEl.textContent = activeCount;
+        inactiveUsersEl.textContent = inactiveCount;
+        
+        // Show/hide empty state
+        emptyState.style.display = totalUsers === 0 ? "block" : "none";
+      }
+      
+      // Get initials from name
+      function getInitials(name) {
+        return name
+          .split(" ")
+          .map(word => word.charAt(0))
+          .join("")
+          .toUpperCase()
+          .substring(0, 2);
+      }
+      
+      // Email validation
+      function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+      
+      // Show toast notification
+      function showToast(message, type = "success") {
+        // Set message and type
+        toastMessage.textContent = message;
+        toast.className = "toast";
+        toast.classList.add(`toast-${type}`);
+        
+        // Set icon based on type
+        const icon = toast.querySelector("i");
+        if (type === "success") {
+          icon.className = "fas fa-check-circle";
+        } else if (type === "error") {
+          icon.className = "fas fa-exclamation-circle";
+        } else {
+          icon.className = "fas fa-info-circle";
+        }
+        
+        // Show toast
+        toast.classList.add("show");
+        
+        // Hide after 3 seconds
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+      
+      // Initialize animations
+      document.addEventListener("DOMContentLoaded", () => {
+        // Animate initial rows
+        const rows = tableBody.querySelectorAll("tr");
+        rows.forEach((row, index) => {
+          row.style.animationDelay = `${index * 0.1}s`;
+          row.classList.add("animate");
+        });
+      });
+    </script>
+  </body>
 </html>
