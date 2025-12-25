@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Dynamic Table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --danger-color: #e74c3c;
+        --warning-color: #f39c12;
+        --dark-color: #2c3e50;
+        --light-color: #ecf0f1;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --border-radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 20px 0;
+      }
+
+      h1 {
+        color: var(--dark-color);
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      h1 i {
+        color: var(--primary-color);
+      }
+
+      .subtitle {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      h2 {
+        color: var(--dark-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--light-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      h2 i {
+        color: var(--primary-color);
+      }
+
+      /* Form Styles */
+      #dataForm {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--dark-color);
+        font-size: 0.9rem;
+      }
+
+      input {
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: var(--border-radius);
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        background-color: white;
+      }
+
+      input::placeholder {
+        color: #95a5a6;
+      }
+
+      .btn {
+        padding: 14px 25px;
+        background: linear-gradient(to right, var(--primary-color), #2980b9);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        grid-column: 1 / -1;
+      }
+
+      .btn:hover {
+        background: linear-gradient(to right, #2980b9, var(--primary-color));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-delete {
+        background: linear-gradient(to right, var(--danger-color), #c0392b);
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .btn-delete:hover {
+        background: linear-gradient(to right, #c0392b, var(--danger-color));
+        box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
+      }
+
+      /* Table Styles */
+      .table-container {
+        overflow-x: auto;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        background: white;
+        margin-top: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px;
+      }
+
+      thead {
+        background: linear-gradient(to right, var(--primary-color), #2980b9);
+      }
+
+      th {
+        color: white;
+        font-weight: 600;
+        text-align: left;
+        padding: 18px 15px;
+        position: relative;
+      }
+
+      th:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 20%;
+        height: 60%;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      tbody tr {
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #eee;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tbody tr:hover {
+        background-color: rgba(52, 152, 219, 0.05);
+        transform: scale(1.002);
+      }
+
+      td {
+        padding: 18px 15px;
+        color: #555;
+      }
+
+      .action-cell {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        color: #95a5a6;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #ddd;
+      }
+
+      .empty-state p {
+        font-size: 1.1rem;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px 0;
+        color: #7f8c8d;
+        border-top: 1px solid #eee;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+        
+        .card {
+          padding: 20px;
+        }
+        
+        #dataForm {
+          grid-template-columns: 1fr;
+        }
+        
+        th, td {
+          padding: 15px 10px;
+        }
+        
+        .action-cell {
+          flex-direction: column;
+          gap: 5px;
+        }
+        
+        .btn-delete {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+        }
+        
+        h1 {
+          font-size: 1.8rem;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        h2 {
+          font-size: 1.4rem;
+        }
+        
+        input, .btn {
+          padding: 12px;
+        }
+        
+        /* Stacked table for mobile */
+        @media (max-width: 600px) {
+          table, thead, tbody, th, td, tr {
+            display: block;
+          }
+          
+          thead {
+            display: none;
+          }
+          
+          tbody tr {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            background: white;
+            box-shadow: var(--shadow);
+          }
+          
+          td {
+            padding: 12px 10px;
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 45%;
+            text-align: right;
+          }
+          
+          td:last-child {
+            border-bottom: none;
+          }
+          
+          td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            font-weight: 600;
+            color: var(--dark-color);
+            text-align: left;
+          }
+          
+          .action-cell {
+            flex-direction: row;
+            justify-content: flex-end;
+          }
+          
+          .btn-delete {
+            width: auto;
+          }
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      /* Stats */
+      .stats {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        color: var(--dark-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <header>
+        <h1><i class="fas fa-table"></i> Dynamic Table Manager</h1>
+        <p class="subtitle">Add, view, and manage user data with this fully responsive dynamic table. Works perfectly on all devices from mobile to desktop.</p>
+      </header>
+
+      <div class="card">
+        <h2><i class="fas fa-user-plus"></i> Add New User</h2>
+        <form id="dataForm">
+          <div class="form-group">
+            <label for="name"><i class="fas fa-user"></i> Full Name</label>
+            <input type="text" id="name" placeholder="Enter full name" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+            <input type="email" id="email" placeholder="Enter email address" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="age"><i class="fas fa-birthday-cake"></i> Age</label>
+            <input type="number" id="age" placeholder="Enter age" min="1" max="120" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="address"><i class="fas fa-home"></i> Address</label>
+            <input type="text" id="address" placeholder="Enter address" required />
+          </div>
+          
+          <button type="submit" class="btn">
+            <i class="fas fa-plus-circle"></i> Add to Table
+          </button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2><i class="fas fa-users"></i> User Records</h2>
+        <div class="stats">
+          <span>Total Users: <span id="totalUsers">0</span></span>
+          <span>Average Age: <span id="averageAge">0</span></span>
+        </div>
+        
+        <div class="table-container">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Initial sample data -->
+              <tr class="fade-in">
+                <td data-label="Name">John Smith</td>
+                <td data-label="Email">john.smith@example.com</td>
+                <td data-label="Age">28</td>
+                <td data-label="Address">123 Main St, New York</td>
+                <td data-label="Actions" class="action-cell">
+                  <button class="btn btn-delete" onclick="deleteRow(this)">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+              <tr class="fade-in">
+                <td data-label="Name">Sarah Johnson</td>
+                <td data-label="Email">sarah.j@example.com</td>
+                <td data-label="Age">32</td>
+                <td data-label="Address">456 Oak Ave, Los Angeles</td>
+                <td data-label="Actions" class="action-cell">
+                  <button class="btn btn-delete" onclick="deleteRow(this)">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div id="emptyState" class="empty-state" style="display: none;">
+          <i class="fas fa-users-slash"></i>
+          <p>No users found. Add your first user above!</p>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 Dynamic Table Manager | Designed to be fully responsive on all devices</p>
+        <p><i class="fas fa-mobile-alt"></i> <i class="fas fa-tablet-alt"></i> <i class="fas fa-laptop"></i></p>
+      </footer>
+    </div>
+
+    <script>
+      // DOM Elements
+      const form = document.getElementById("dataForm");
+      const tableBody = document.querySelector("#dataTable tbody");
+      const totalUsersEl = document.getElementById("totalUsers");
+      const averageAgeEl = document.getElementById("averageAge");
+      const emptyState = document.getElementById("emptyState");
+
+      // Update stats function
+      function updateStats() {
+        const rows = tableBody.querySelectorAll("tr");
+        const totalUsers = rows.length;
+        totalUsersEl.textContent = totalUsers;
+        
+        // Calculate average age
+        let totalAge = 0;
+        rows.forEach(row => {
+          const ageCell = row.cells[2];
+          totalAge += parseInt(ageCell.textContent) || 0;
+        });
+        
+        const averageAge = totalUsers > 0 ? (totalAge / totalUsers).toFixed(1) : 0;
+        averageAgeEl.textContent = averageAge;
+        
+        // Show/hide empty state
+        if (totalUsers === 0) {
+          emptyState.style.display = "block";
+          tableBody.style.display = "none";
+        } else {
+          emptyState.style.display = "none";
+          tableBody.style.display = "";
+        }
+      }
+
+      // Form submission handler
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const address = document.getElementById("address").value.trim();
+        
+        // Validation
+        if (!name || !email || !age || !address) {
+          alert("Please fill in all fields");
+          return;
+        }
+        
+        if (!validateEmail(email)) {
+          alert("Please enter a valid email address");
+          return;
+        }
+        
+        if (age < 1 || age > 120) {
+          alert("Please enter a valid age (1-120)");
+          return;
+        }
+        
+        // Create new row
+        const row = document.createElement("tr");
+        row.className = "fade-in";
+        row.innerHTML = `
+          <td data-label="Name">${name}</td>
+          <td data-label="Email">${email}</td>
+          <td data-label="Age">${age}</td>
+          <td data-label="Address">${address}</td>
+          <td data-label="Actions" class="action-cell">
+            <button class="btn btn-delete" onclick="deleteRow(this)">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </td>
+        `;
+        
+        // Add row to table
+        tableBody.appendChild(row);
+        
+        // Update stats
+        updateStats();
+        
+        // Reset form
+        form.reset();
+        document.getElementById("name").focus();
+        
+        // Show success message
+        showToast(`User "${name}" added successfully!`);
+      });
+
+      // Delete row function
+      function deleteRow(button) {
+        const row = button.closest("tr");
+        const userName = row.cells[0].textContent;
+        
+        // Add fade out animation
+        row.style.opacity = "0";
+        row.style.transform = "translateX(100px)";
+        row.style.transition = "all 0.3s ease";
+        
+        // Remove after animation
+        setTimeout(() => {
+          row.remove();
+          updateStats();
+          showToast(`User "${userName}" deleted successfully!`, "danger");
+        }, 300);
+      }
+
+      // Email validation function
+      function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
+      // Toast notification function
+      function showToast(message, type = "success") {
+        // Remove existing toast
+        const existingToast = document.querySelector(".toast");
+        if (existingToast) existingToast.remove();
+        
+        // Create new toast
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+          <i class="fas fa-${type === "success" ? "check-circle" : "exclamation-circle"}"></i>
+          <span>${message}</span>
+        `;
+        
+        // Style the toast
+        toast.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: ${type === "success" ? "linear-gradient(to right, #2ecc71, #27ae60)" : "linear-gradient(to right, #e74c3c, #c0392b)"};
+          color: white;
+          padding: 15px 20px;
+          border-radius: 8px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          z-index: 1000;
+          animation: slideIn 0.3s ease forwards;
+        `;
+        
+        // Add animation
+        const style = document.createElement("style");
+        style.textContent = `
+          @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+          }
+        `;
+        document.head.appendChild(style);
+        
+        // Add to DOM
+        document.body.appendChild(toast);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+          toast.style.animation = "slideOut 0.3s ease forwards";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+
+      // Initialize stats on page load
+      document.addEventListener("DOMContentLoaded", function() {
+        updateStats();
+        
+        // Add animation to existing rows
+        const rows = tableBody.querySelectorAll("tr");
+        rows.forEach((row, index) => {
+          row.style.animationDelay = `${index * 0.1}s`;
+        });
+      });
+    </script>
+  </body>
+</html>
