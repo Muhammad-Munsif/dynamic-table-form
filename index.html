@@ -1,235 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dynamic Table Manager | Premium</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    
-  </head>
-  <body>
-    <div class="container">
-      <!-- Theme Toggle -->
-      <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Table Manager | Premium</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Header -->
+    <header class="header animate">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-table"></i>
+        </div>
+        <div class="logo-text">
+          <h1>TableMaster Pro</h1>
+          <p class="tagline">Manage your data with style. A premium table management experience for all devices.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+      <!-- Left Column: Form & Stats -->
+      <div class="left-column">
+        <!-- Form Card -->
+        <div class="card animate delay-1">
+          <div class="card-header">
+            <i class="fas fa-user-plus"></i>
+            <div>
+              <div class="card-title">Add New Record</div>
+              <div class="card-subtitle">Fill in the details below to add a new user</div>
+            </div>
+          </div>
+
+          <form id="dataForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                <div class="form-icon">
+                  <i class="fas fa-user"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                <div class="form-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" id="age" class="form-input" placeholder="25" min="1" max="120" required>
+                <div class="form-icon">
+                  <i class="fas fa-birthday-cake"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" id="address" class="form-input" placeholder="City, Country" required>
+                <div class="form-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Add to Table
+              </button>
+            </div>
+          </form>
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-value" id="totalUsers">2</div>
+              <div class="stat-label">Total Users</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-value" id="averageAge">30.0</div>
+              <div class="stat-label">Avg. Age</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-value" id="activeUsers">2</div>
+              <div class="stat-label">Active</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-value" id="inactiveUsers">0</div>
+              <div class="stat-label">Inactive</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Header -->
-      <header class="header animate">
-        <div class="logo">
-          <div class="logo-icon">
+      <!-- Right Column: Table -->
+      <div class="right-column">
+        <div class="card animate delay-2">
+          <div class="card-header">
             <i class="fas fa-table"></i>
+            <div>
+              <div class="card-title">User Records</div>
+              <div class="card-subtitle">Manage all your user data in one place</div>
+            </div>
           </div>
-          <div class="logo-text">
-            <h1>TableMaster Pro</h1>
-            <p class="tagline">Manage your data with style. A premium table management experience for all devices.</p>
-          </div>
-        </div>
-      </header>
 
-      <!-- Main Layout -->
-      <div class="main-layout">
-        <!-- Left Column: Form & Stats -->
-        <div class="left-column">
-          <!-- Form Card -->
-          <div class="card animate delay-1">
-            <div class="card-header">
-              <i class="fas fa-user-plus"></i>
-              <div>
-                <div class="card-title">Add New Record</div>
-                <div class="card-subtitle">Fill in the details below to add a new user</div>
-              </div>
-            </div>
-            
-            <form id="dataForm">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="name" class="form-label">Full Name</label>
-                  <input type="text" id="name" class="form-input" placeholder="John Doe" required>
-                  <div class="form-icon">
-                    <i class="fas fa-user"></i>
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label for="email" class="form-label">Email Address</label>
-                  <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
-                  <div class="form-icon">
-                    <i class="fas fa-envelope"></i>
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label for="age" class="form-label">Age</label>
-                  <input type="number" id="age" class="form-input" placeholder="25" min="1" max="120" required>
-                  <div class="form-icon">
-                    <i class="fas fa-birthday-cake"></i>
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label for="address" class="form-label">Address</label>
-                  <input type="text" id="address" class="form-input" placeholder="City, Country" required>
-                  <div class="form-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                  </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">
-                  <i class="fas fa-plus-circle"></i> Add to Table
-                </button>
-              </div>
-            </form>
-            
-            <!-- Stats -->
-            <div class="stats-grid">
-              <div class="stat-card">
-                <div class="stat-icon">
-                  <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-value" id="totalUsers">2</div>
-                <div class="stat-label">Total Users</div>
-              </div>
-              
-              <div class="stat-card">
-                <div class="stat-icon">
-                  <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="stat-value" id="averageAge">30.0</div>
-                <div class="stat-label">Avg. Age</div>
-              </div>
-              
-              <div class="stat-card">
-                <div class="stat-icon">
-                  <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="stat-value" id="activeUsers">2</div>
-                <div class="stat-label">Active</div>
-              </div>
-              
-              <div class="stat-card">
-                <div class="stat-icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-value" id="inactiveUsers">0</div>
-                <div class="stat-label">Inactive</div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Age</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <!-- Initial sample data -->
+                <tr>
+                  <td data-label="User">
+                    <div class="user-cell">
+                      <div class="user-avatar">JD</div>
+                      <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-email">john.doe@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Email">john.doe@example.com</td>
+                  <td data-label="Age">28</td>
+                  <td data-label="Status">
+                    <span class="status-badge status-active">Active</span>
+                  </td>
+                  <td data-label="Actions">
+                    <div class="action-buttons">
+                      <button class="btn btn-edit btn-sm" onclick="editRow(this)">
+                        <i class="fas fa-edit"></i> Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                        <i class="fas fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-        <!-- Right Column: Table -->
-        <div class="right-column">
-          <div class="card animate delay-2">
-            <div class="card-header">
-              <i class="fas fa-table"></i>
-              <div>
-                <div class="card-title">User Records</div>
-                <div class="card-subtitle">Manage all your user data in one place</div>
-              </div>
+                <tr>
+                  <td data-label="User">
+                    <div class="user-cell">
+                      <div class="user-avatar">SJ</div>
+                      <div class="user-info">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-email">sarah.j@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Email">sarah.j@example.com</td>
+                  <td data-label="Age">32</td>
+                  <td data-label="Status">
+                    <span class="status-badge status-active">Active</span>
+                  </td>
+                  <td data-label="Actions">
+                    <div class="action-buttons">
+                      <button class="btn btn-edit btn-sm" onclick="editRow(this)">
+                        <i class="fas fa-edit"></i> Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                        <i class="fas fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">
+              <i class="fas fa-users-slash"></i>
             </div>
-            
-            <div class="table-container">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>User</th>
-                    <th>Email</th>
-                    <th>Age</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="tableBody">
-                  <!-- Initial sample data -->
-                  <tr>
-                    <td data-label="User">
-                      <div class="user-cell">
-                        <div class="user-avatar">JD</div>
-                        <div class="user-info">
-                          <div class="user-name">John Doe</div>
-                          <div class="user-email">john.doe@example.com</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td data-label="Email">john.doe@example.com</td>
-                    <td data-label="Age">28</td>
-                    <td data-label="Status">
-                      <span class="status-badge status-active">Active</span>
-                    </td>
-                    <td data-label="Actions">
-                      <div class="action-buttons">
-                        <button class="btn btn-edit btn-sm" onclick="editRow(this)">
-                          <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
-                          <i class="fas fa-trash"></i> Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td data-label="User">
-                      <div class="user-cell">
-                        <div class="user-avatar">SJ</div>
-                        <div class="user-info">
-                          <div class="user-name">Sarah Johnson</div>
-                          <div class="user-email">sarah.j@example.com</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td data-label="Email">sarah.j@example.com</td>
-                    <td data-label="Age">32</td>
-                    <td data-label="Status">
-                      <span class="status-badge status-active">Active</span>
-                    </td>
-                    <td data-label="Actions">
-                      <div class="action-buttons">
-                        <button class="btn btn-edit btn-sm" onclick="editRow(this)">
-                          <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">
-                          <i class="fas fa-trash"></i> Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <div id="emptyState" class="empty-state" style="display: none;">
-              <div class="empty-state-icon">
-                <i class="fas fa-users-slash"></i>
-              </div>
-              <div class="empty-state-text">No users found</div>
-              <div class="empty-state-subtext">Add your first user using the form on the left</div>
-            </div>
+            <div class="empty-state-text">No users found</div>
+            <div class="empty-state-subtext">Add your first user using the form on the left</div>
           </div>
         </div>
       </div>
-
-      <!-- Footer -->
-      <footer class="footer animate delay-3">
-        <p>© 2023 TableMaster Pro | Premium Table Management System</p>
-        <p>Designed with ❤️ for all devices</p>
-        <div class="device-icons">
-          <i class="fas fa-mobile-alt"></i>
-          <i class="fas fa-tablet-alt"></i>
-          <i class="fas fa-laptop"></i>
-          <i class="fas fa-desktop"></i>
-        </div>
-      </footer>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-      <i class="fas fa-check-circle"></i>
-      <span id="toastMessage">Record added successfully!</span>
-    </div>
+    <!-- Footer -->
+    <footer class="footer animate delay-3">
+      <p>© 2023 TableMaster Pro | Premium Table Management System</p>
+      <p>Designed with ❤️ for all devices</p>
+      <div class="device-icons">
+        <i class="fas fa-mobile-alt"></i>
+        <i class="fas fa-tablet-alt"></i>
+        <i class="fas fa-laptop"></i>
+        <i class="fas fa-desktop"></i>
+      </div>
+    </footer>
+  </div>
 
-    
-  </body>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Record added successfully!</span>
+  </div>
+
+
+</body>
+
 </html>
