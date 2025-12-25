@@ -1,106 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsive Dynamic Table</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-  </head>
-  <body>
-    <div class="main-container">
-      <header>
-        <h1><i class="fas fa-table"></i> Dynamic Table Manager</h1>
-        <p class="subtitle">Add, view, and manage user data with this fully responsive dynamic table. Works perfectly on all devices from mobile to desktop.</p>
-      </header>
 
-      <div class="card">
-        <h2><i class="fas fa-user-plus"></i> Add New User</h2>
-        <form id="dataForm">
-          <div class="form-group">
-            <label for="name"><i class="fas fa-user"></i> Full Name</label>
-            <input type="text" id="name" placeholder="Enter full name" required />
-          </div>
-          
-          <div class="form-group">
-            <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
-            <input type="email" id="email" placeholder="Enter email address" required />
-          </div>
-          
-          <div class="form-group">
-            <label for="age"><i class="fas fa-birthday-cake"></i> Age</label>
-            <input type="number" id="age" placeholder="Enter age" min="1" max="120" required />
-          </div>
-          
-          <div class="form-group">
-            <label for="address"><i class="fas fa-home"></i> Address</label>
-            <input type="text" id="address" placeholder="Enter address" required />
-          </div>
-          
-          <button type="submit" class="btn">
-            <i class="fas fa-plus-circle"></i> Add to Table
-          </button>
-        </form>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Dynamic Table</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
 
-      <div class="card">
-        <h2><i class="fas fa-users"></i> User Records</h2>
-        <div class="stats">
-          <span>Total Users: <span id="totalUsers">0</span></span>
-          <span>Average Age: <span id="averageAge">0</span></span>
-        </div>
-        
-        <div class="table-container">
-          <table id="dataTable">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Age</th>
-                <th>Address</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Initial sample data -->
-              <tr class="fade-in">
-                <td data-label="Name">John Smith</td>
-                <td data-label="Email">john.smith@example.com</td>
-                <td data-label="Age">28</td>
-                <td data-label="Address">123 Main St, New York</td>
-                <td data-label="Actions" class="action-cell">
-                  <button class="btn btn-delete" onclick="deleteRow(this)">
-                    <i class="fas fa-trash"></i> Delete
-                  </button>
-                </td>
-              </tr>
-              <tr class="fade-in">
-                <td data-label="Name">Sarah Johnson</td>
-                <td data-label="Email">sarah.j@example.com</td>
-                <td data-label="Age">32</td>
-                <td data-label="Address">456 Oak Ave, Los Angeles</td>
-                <td data-label="Actions" class="action-cell">
-                  <button class="btn btn-delete" onclick="deleteRow(this)">
-                    <i class="fas fa-trash"></i> Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <div id="emptyState" class="empty-state" style="display: none;">
-          <i class="fas fa-users-slash"></i>
-          <p>No users found. Add your first user above!</p>
-        </div>
-      </div>
+<body>
+  <div class="main-container">
+    <header>
+      <h1><i class="fas fa-table"></i> Dynamic Table Manager</h1>
+      <p class="subtitle">Add, view, and manage user data with this fully responsive dynamic table. Works perfectly on
+        all devices from mobile to desktop.</p>
+    </header>
 
-      <footer>
-        <p>© 2023 Dynamic Table Manager | Designed to be fully responsive on all devices</p>
-        <p><i class="fas fa-mobile-alt"></i> <i class="fas fa-tablet-alt"></i> <i class="fas fa-laptop"></i></p>
-      </footer>
+    <div class="card">
+      <h2><i class="fas fa-user-plus"></i> Add New User</h2>
+      <form id="dataForm">
+        <div class="form-group">
+          <label for="name"><i class="fas fa-user"></i> Full Name</label>
+          <input type="text" id="name" placeholder="Enter full name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+          <input type="email" id="email" placeholder="Enter email address" required />
+        </div>
+
+        <div class="form-group">
+          <label for="age"><i class="fas fa-birthday-cake"></i> Age</label>
+          <input type="number" id="age" placeholder="Enter age" min="1" max="120" required />
+        </div>
+
+        <div class="form-group">
+          <label for="address"><i class="fas fa-home"></i> Address</label>
+          <input type="text" id="address" placeholder="Enter address" required />
+        </div>
+
+        <button type="submit" class="btn">
+          <i class="fas fa-plus-circle"></i> Add to Table
+        </button>
+      </form>
     </div>
 
-    
-  </body>
+    <div class="card">
+      <h2><i class="fas fa-users"></i> User Records</h2>
+      <div class="stats">
+        <span>Total Users: <span id="totalUsers">0</span></span>
+        <span>Average Age: <span id="averageAge">0</span></span>
+      </div>
+
+      <div class="table-container">
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Age</th>
+              <th>Address</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Initial sample data -->
+            <tr class="fade-in">
+              <td data-label="Name">John Smith</td>
+              <td data-label="Email">john.smith@example.com</td>
+              <td data-label="Age">28</td>
+              <td data-label="Address">123 Main St, New York</td>
+              <td data-label="Actions" class="action-cell">
+                <button class="btn btn-delete" onclick="deleteRow(this)">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+            <tr class="fade-in">
+              <td data-label="Name">Sarah Johnson</td>
+              <td data-label="Email">sarah.j@example.com</td>
+              <td data-label="Age">32</td>
+              <td data-label="Address">456 Oak Ave, Los Angeles</td>
+              <td data-label="Actions" class="action-cell">
+                <button class="btn btn-delete" onclick="deleteRow(this)">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <i class="fas fa-users-slash"></i>
+        <p>No users found. Add your first user above!</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2023 Dynamic Table Manager | Designed to be fully responsive on all devices</p>
+      <p><i class="fas fa-mobile-alt"></i> <i class="fas fa-tablet-alt"></i> <i class="fas fa-laptop"></i></p>
+    </footer>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
 </html>
