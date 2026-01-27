@@ -1,4 +1,3 @@
-<script>
     // DOM Elements
     const form = document.getElementById("dataForm");
     const tableBody = document.getElementById("tableBody");
@@ -455,4 +454,3 @@
         showFormStatus("Fill in the form to add a new user. All fields are required.", "info");
       }, 1000);
     });
-  </script>
