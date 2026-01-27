@@ -1,4 +1,4 @@
-<style>
+
     :root {
       /* Light Theme */
       --primary: #6366f1;
@@ -861,4 +861,3 @@
       border-color: var(--danger);
       color: var(--danger);
     }
-  </style>
