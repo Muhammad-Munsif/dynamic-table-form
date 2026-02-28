@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
   <title>Dynamic Table Manager · Premium · Modal Actions</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-  
+
 </head>
+
 <body>
   <div class="container">
     <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
@@ -15,7 +17,10 @@
     <header class="header animate">
       <div class="logo">
         <div class="logo-icon"><i class="fas fa-table"></i></div>
-        <div class="logo-text"><h1>TableMaster Pro</h1><p class="tagline">Manage with style — modal actions & responsive</p></div>
+        <div class="logo-text">
+          <h1>TableMaster Pro</h1>
+          <p class="tagline">Manage with style — modal actions & responsive</p>
+        </div>
       </div>
     </header>
 
@@ -36,61 +41,205 @@
       <!-- left: form -->
       <div class="left-column">
         <div class="card animate delay-1">
-          <div class="card-header"><i class="fas fa-user-plus"></i><div><div class="card-title">Add New User</div><div class="card-subtitle">All fields required</div></div></div>
-          <div id="formStatus" class="form-status" style="display:none; padding:10px; margin-bottom:15px; border-radius:8px;"></div>
+          <div class="card-header"><i class="fas fa-user-plus"></i>
+            <div>
+              <div class="card-title">Add New User</div>
+              <div class="card-subtitle">All fields required</div>
+            </div>
+          </div>
+          <div id="formStatus" class="form-status"
+            style="display:none; padding:10px; margin-bottom:15px; border-radius:8px;"></div>
           <form id="dataForm">
             <div class="form-grid">
-              <div class="form-group"><label class="form-label"><i class="fas fa-user"></i> Full Name</label><div class="form-input-wrapper"><input type="text" id="name" class="form-input" placeholder="Enter full name" required><div class="form-icon"><i class="fas fa-user"></i></div></div><div class="form-helper"><i class="fas fa-info-circle"></i> First & last name</div><div id="nameValidation" class="validation-message"></div></div>
-              <div class="form-group"><label class="form-label"><i class="fas fa-envelope"></i> Email</label><div class="form-input-wrapper"><input type="email" id="email" class="form-input" placeholder="user@example.com" required><div class="form-icon"><i class="fas fa-envelope"></i></div></div><div class="form-helper">Valid email</div><div id="emailValidation" class="validation-message"></div></div>
-              <div class="form-group"><label class="form-label"><i class="fas fa-birthday-cake"></i> Age</label><div class="form-input-wrapper"><input type="number" id="age" class="form-input" placeholder="Age" min="18" max="120" required><div class="form-icon"><i class="fas fa-birthday-cake"></i></div></div><div class="form-helper">18–120 years</div><div id="ageValidation" class="validation-message"></div></div>
-              <div class="form-group"><label class="form-label"><i class="fas fa-map-marker-alt"></i> Location</label><div class="form-input-wrapper"><input type="text" id="location" class="form-input" placeholder="City, Country" required><div class="form-icon"><i class="fas fa-map-marker-alt"></i></div></div><div class="form-helper">e.g., New York, USA</div><div id="locationValidation" class="validation-message"></div></div>
-              <div class="form-group"><label class="form-label"><i class="fas fa-circle"></i> Status</label><div class="form-input-wrapper"><select id="status" class="form-input" required><option value="">Select</option><option value="active">Active</option><option value="inactive">Inactive</option></select><div class="form-icon"><i class="fas fa-chevron-down"></i></div></div></div>
-              <div class="form-group"><label class="form-label"><i class="fas fa-user-tag"></i> Role</label><div class="form-input-wrapper"><select id="role" class="form-input" required><option value="">Select</option><option value="admin">Admin</option><option value="editor">Editor</option><option value="viewer">Viewer</option><option value="user">Regular User</option></select><div class="form-icon"><i class="fas fa-chevron-down"></i></div></div></div>
-              <div class="form-actions"><button type="submit" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> <span id="submitBtnText">Add User</span></button><button type="button" id="clearForm" class="btn btn-outline"><i class="fas fa-times"></i> Clear</button></div>
+              <div class="form-group"><label class="form-label"><i class="fas fa-user"></i> Full Name</label>
+                <div class="form-input-wrapper"><input type="text" id="name" class="form-input"
+                    placeholder="Enter full name" required>
+                  <div class="form-icon"><i class="fas fa-user"></i></div>
+                </div>
+                <div class="form-helper"><i class="fas fa-info-circle"></i> First & last name</div>
+                <div id="nameValidation" class="validation-message"></div>
+              </div>
+              <div class="form-group"><label class="form-label"><i class="fas fa-envelope"></i> Email</label>
+                <div class="form-input-wrapper"><input type="email" id="email" class="form-input"
+                    placeholder="user@example.com" required>
+                  <div class="form-icon"><i class="fas fa-envelope"></i></div>
+                </div>
+                <div class="form-helper">Valid email</div>
+                <div id="emailValidation" class="validation-message"></div>
+              </div>
+              <div class="form-group"><label class="form-label"><i class="fas fa-birthday-cake"></i> Age</label>
+                <div class="form-input-wrapper"><input type="number" id="age" class="form-input" placeholder="Age"
+                    min="18" max="120" required>
+                  <div class="form-icon"><i class="fas fa-birthday-cake"></i></div>
+                </div>
+                <div class="form-helper">18–120 years</div>
+                <div id="ageValidation" class="validation-message"></div>
+              </div>
+              <div class="form-group"><label class="form-label"><i class="fas fa-map-marker-alt"></i> Location</label>
+                <div class="form-input-wrapper"><input type="text" id="location" class="form-input"
+                    placeholder="City, Country" required>
+                  <div class="form-icon"><i class="fas fa-map-marker-alt"></i></div>
+                </div>
+                <div class="form-helper">e.g., New York, USA</div>
+                <div id="locationValidation" class="validation-message"></div>
+              </div>
+              <div class="form-group"><label class="form-label"><i class="fas fa-circle"></i> Status</label>
+                <div class="form-input-wrapper"><select id="status" class="form-input" required>
+                    <option value="">Select</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                  <div class="form-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+              </div>
+              <div class="form-group"><label class="form-label"><i class="fas fa-user-tag"></i> Role</label>
+                <div class="form-input-wrapper"><select id="role" class="form-input" required>
+                    <option value="">Select</option>
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                    <option value="viewer">Viewer</option>
+                    <option value="user">Regular User</option>
+                  </select>
+                  <div class="form-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+              </div>
+              <div class="form-actions"><button type="submit" class="btn btn-primary btn-block"><i
+                    class="fas fa-plus-circle"></i> <span id="submitBtnText">Add User</span></button><button
+                  type="button" id="clearForm" class="btn btn-outline"><i class="fas fa-times"></i> Clear</button></div>
             </div>
           </form>
           <div class="stats-grid">
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-value" id="totalUsers">2</div><div class="stat-label">Total</div></div>
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-value" id="averageAge">30.0</div><div class="stat-label">Avg Age</div></div>
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-check-circle"></i></div><div class="stat-value" id="activeUsers">2</div><div class="stat-label">Active</div></div>
-            <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock"></i></div><div class="stat-value" id="inactiveUsers">0</div><div class="stat-label">Inactive</div></div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-users"></i></div>
+              <div class="stat-value" id="totalUsers">2</div>
+              <div class="stat-label">Total</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+              <div class="stat-value" id="averageAge">30.0</div>
+              <div class="stat-label">Avg Age</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="stat-value" id="activeUsers">2</div>
+              <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-clock"></i></div>
+              <div class="stat-value" id="inactiveUsers">0</div>
+              <div class="stat-label">Inactive</div>
+            </div>
           </div>
         </div>
       </div>
       <!-- right: table -->
       <div class="right-column">
         <div class="card animate delay-2">
-          <div class="card-header"><i class="fas fa-table"></i><div><div class="card-title">User Records</div><div class="card-subtitle">Manage all users</div></div></div>
+          <div class="card-header"><i class="fas fa-table"></i>
+            <div>
+              <div class="card-title">User Records</div>
+              <div class="card-subtitle">Manage all users</div>
+            </div>
+          </div>
           <div class="table-container">
             <table class="table">
-              <thead><tr><th>User</th><th>Email</th><th>Age</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Age</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
               <tbody id="tableBody">
                 <tr>
-                  <td data-label="User"><div class="user-cell"><div class="user-avatar">JD</div><div class="user-info"><div class="user-name">John Doe</div><div class="user-email">john.doe@example.com</div></div></div></td>
-                  <td data-label="Email">john.doe@example.com</td><td data-label="Age">28</td><td data-label="Role">admin</td>
-                  <td data-label="Status"><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
-                  <td data-label="Actions"><div class="action-buttons"><button class="btn btn-edit btn-sm" onclick="editRow(this)"><i class="fas fa-edit"></i> Edit</button><button class="btn btn-danger btn-sm" onclick="deleteRow(this)"><i class="fas fa-trash"></i> Delete</button></div></td>
+                  <td data-label="User">
+                    <div class="user-cell">
+                      <div class="user-avatar">JD</div>
+                      <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-email">john.doe@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Email">john.doe@example.com</td>
+                  <td data-label="Age">28</td>
+                  <td data-label="Role">admin</td>
+                  <td data-label="Status"><span class="status-badge status-active"><i class="fas fa-circle"></i>
+                      Active</span></td>
+                  <td data-label="Actions">
+                    <div class="action-buttons"><button class="btn btn-edit btn-sm" onclick="editRow(this)"><i
+                          class="fas fa-edit"></i> Edit</button><button class="btn btn-danger btn-sm"
+                        onclick="deleteRow(this)"><i class="fas fa-trash"></i> Delete</button></div>
+                  </td>
                 </tr>
                 <tr>
-                  <td data-label="User"><div class="user-cell"><div class="user-avatar">SJ</div><div class="user-info"><div class="user-name">Sarah Johnson</div><div class="user-email">sarah.j@example.com</div></div></div></td>
-                  <td data-label="Email">sarah.j@example.com</td><td data-label="Age">32</td><td data-label="Role">editor</td>
-                  <td data-label="Status"><span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span></td>
-                  <td data-label="Actions"><div class="action-buttons"><button class="btn btn-edit btn-sm" onclick="editRow(this)"><i class="fas fa-edit"></i> Edit</button><button class="btn btn-danger btn-sm" onclick="deleteRow(this)"><i class="fas fa-trash"></i> Delete</button></div></td>
+                  <td data-label="User">
+                    <div class="user-cell">
+                      <div class="user-avatar">SJ</div>
+                      <div class="user-info">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-email">sarah.j@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Email">sarah.j@example.com</td>
+                  <td data-label="Age">32</td>
+                  <td data-label="Role">editor</td>
+                  <td data-label="Status"><span class="status-badge status-active"><i class="fas fa-circle"></i>
+                      Active</span></td>
+                  <td data-label="Actions">
+                    <div class="action-buttons"><button class="btn btn-edit btn-sm" onclick="editRow(this)"><i
+                          class="fas fa-edit"></i> Edit</button><button class="btn btn-danger btn-sm"
+                        onclick="deleteRow(this)"><i class="fas fa-trash"></i> Delete</button></div>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div id="emptyState" class="empty-state" style="display:none;"><i class="fas fa-users-slash fa-3x" style="opacity:0.5;"></i><p>No users found</p></div>
+          <div id="emptyState" class="empty-state" style="display:none;"><i class="fas fa-users-slash fa-3x"
+              style="opacity:0.5;"></i>
+            <p>No users found</p>
+          </div>
         </div>
       </div>
     </div>
-    <footer class="footer"><p>© 2025 · Premium modal actions · fully responsive</p></footer>
+    <footer class="footer">
+      <p>© 2025 · Premium modal actions · fully responsive</p>
+    </footer>
   </div>
 
   <!-- toast -->
   <div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage"></span></div>
 
-  
-  <style> .animate { animation: fadeInUp 0.4s ease both; } @keyframes fadeInUp { 0% { opacity:0; transform:translateY(20px); } 100% { opacity:1; transform:translateY(0); } } .delay-1 { animation-delay:0.1s; } .delay-2 { animation-delay:0.2s; } </style>
+
+  <style>
+    .animate {
+      animation: fadeInUp 0.4s ease both;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+  </style>
 </body>
+
 </html>
