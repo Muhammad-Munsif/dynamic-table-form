@@ -1,4 +1,4 @@
-<script>
+
     (function() {
       // ----- DOM elements -----
       const form = document.getElementById('dataForm');
@@ -187,4 +187,3 @@
       // animate existing rows
       [...tableBody.children].forEach((r,i)=> { r.style.animation = `fadeInUp 0.3s ${i*0.1}s both`; });
     })();
-  </script>
