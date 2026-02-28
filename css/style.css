@@ -1,4 +1,4 @@
-<style>
+
     /* ----- ROOT & THEME (same premium style, compact & improved) ----- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -186,4 +186,4 @@
     .form-input.valid { border-color: var(--secondary); }
     .form-input.invalid { border-color: var(--danger); }
     .validation-message { font-size: 0.8rem; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
-  </style>
+  
